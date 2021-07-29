@@ -6,6 +6,13 @@ This repository is a snapshot of Geoviosto core derived from the development rep
 ## Usage
 
 ```js
+import {
+    Geovisto
+} from 'geovisto';
+import 'geovisto/dist/index.css';
+
+// ,,,
+
 // create instance of map with given props
 const map = Geovisto.createMap({
     id: "my-geovisto-map",
