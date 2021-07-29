@@ -1,0 +1,12 @@
+:root {
+    --default-font: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.geovisto-map {
+    height: 100%;
+    font-family: var(--default-font);
+}
+
+.geovisto-map-container {
+    height: 100%;
+}
