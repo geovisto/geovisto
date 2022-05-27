@@ -74,6 +74,7 @@ class CheckboxSidebarInput extends AbstractMapFormInput {
         input.type = 'checkbox';
         input.onchange = props.onChangeAction;
         input.name = props.name;
+        input.setAttribute("value", String(props.defaultValue || false));
         return input;
     }
 

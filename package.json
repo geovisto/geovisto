@@ -1,6 +1,6 @@
 {
   "name": "geovisto",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "TypeScript mapping library for generic geospatial data visualization based on Leaflet",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -29,12 +29,32 @@
   },
   "contributors": [
     {
-      "name": "Krystof Rykala",
-      "url": "https://github.com/rykala"
+      "name": "Martin Chladek",
+      "url": "https://github.com/chladekm"
+    },
+    {
+      "name": "Lukas Dohnal",
+      "url": "https://github.com/luke015"
     },
     {
       "name": "Jakub Kachlik",
       "url": "https://github.com/kachlikjakub"
+    },
+    {
+      "name": "Tomas Koscielniak",
+      "url": "https://github.com/tkosci"
+    },
+    {
+      "name": "Vojtech Maly",
+      "url": "https://github.com/FabioHexo"
+    },
+    {
+      "name": "Krystof Rykala",
+      "url": "https://github.com/rykala"
+    },
+    {
+      "name": "Andrej Tlcina",
+      "url": "https://github.com/Attanox"
     }
   ],
   "license": "MIT",

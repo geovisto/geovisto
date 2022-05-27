@@ -11,5 +11,6 @@ interface ILabeledSliderFormInputProps extends IMapFormInputProps {
     defaultValue: string;
     maxValue: string;
     minValue: string;
+    step?: number;
 }
 export default ILabeledSliderFormInputProps;

@@ -9,7 +9,7 @@ import MapChangeEvent from "../generic/MapChangeEvent";
  * 
  * @author Jiri Hynek
  */
-class DataChangeEvent<TSource extends IMapObject> extends MapChangeEvent<TSource, IMapData> implements IMapDataChangeEvent {
+class DataChangeEvent<TSource extends IMapObject = IMapObject> extends MapChangeEvent<IMapData, TSource> implements IMapDataChangeEvent {
     
     private animateOptions?: IDataChangeAnimateOptions;
 

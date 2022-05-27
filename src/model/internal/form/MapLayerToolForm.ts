@@ -54,6 +54,23 @@ abstract class MapLayerToolForm<T extends ILayerTool> extends MapObjectForm<T> {
     }
 
     /**
+     * Help method which returns a new universal text input for the any map domain dimension.
+     *
+     * @param dimension
+     */
+    protected getTextInput(dimension: IMapTypeDimension<string>, formAction?: (ev: Event) => void): IMapFormInput {
+        return new LabeledTextFormInput({
+            label: dimension.getName(),
+            onChangeAction: (ev: Event) => {
+                this.getMapObject().updateDimension(dimension, (<HTMLInputElement> ev.target).value, undefined);
+                if(formAction) {
+                    formAction(ev);
+                }
+            }
+        });
+    }
+
+    /**
      * Help method which returns a new universal checkbox input for the any map boolean dimension.
      * 
      * @param dimension

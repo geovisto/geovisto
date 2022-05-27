@@ -1,10 +1,14 @@
 import IFilterFormInputProps from "./filter/IFilterFormInputProps";
 import ILabeledAutocompleteFormInputProps from "./labeled/autocomplete/ILabeledAutocompleteFormInputProps";
+import ILabeledColorFormInputProps from "./labeled/color/ILabeledColorFormInputProps";
+import ILabeledCheckboxFormInputProps from "./labeled/checkbox/ILabeledCheckboxFormInputProps";
 import ILabeledTextFormInputProps from "./labeled/text/ILabeledTextFormInputProps";
 import ILabeledSelectFormInputProps from "./labeled/select/ILabeledSelectFormInputProps";
+import ILabeledSliderFormInputProps from "./labeled/slider/ILabeledSliderFormInputProps";
 import IMapFormInput from "./IMapFormInput";
 import ISelectFormInputProps from "./basic/select/ISelectFormInputProps";
 import ITextFormInputProps from "./basic/text/ITextFormInputProps";
+import ITextareaFormInputProps from "./basic/textarea/ITextareaFormInputProps";
 
 /**
  * This interface declares a factory for form inputs.
@@ -29,6 +33,11 @@ interface IMapFormInputFactory {
     labeledText(props: ILabeledTextFormInputProps): IMapFormInput;
     
     /**
+     * It creates the textarea form input.
+     */
+    textarea(props: ITextareaFormInputProps): IMapFormInput
+    
+    /**
      * It creates the labeled select form input.
      */
     labeledSelect(props: ILabeledSelectFormInputProps): IMapFormInput;
@@ -47,5 +56,20 @@ interface IMapFormInputFactory {
      * It creates the filter autocomplete form input.
      */
     filterAutocomplete(props: IFilterFormInputProps): IMapFormInput;
+
+    /**
+     * It creates the labeled slider form input.
+     */
+    labeledSlider(props: ILabeledSliderFormInputProps): IMapFormInput;
+
+    /**
+     * It creates the labeled color form input.
+     */
+    labeledColor(props: ILabeledColorFormInputProps): IMapFormInput;
+
+    /**
+     * It creates the labeled checkbox form input.
+     */    
+    labeledCheckbox(props: ILabeledCheckboxFormInputProps): IMapFormInput;
 }
 export default IMapFormInputFactory;

@@ -75,6 +75,7 @@ class LabeledSliderFormInput extends AbstractMapFormInput {
             this.input.setAttribute("min", props.minValue);
             this.input.setAttribute("max", props.maxValue);
             this.input.setAttribute("value", props.defaultValue);
+            this.input.setAttribute("step", String(props.step || 1));
             this.input.onchange = props.onChangeAction;
             this.input.addEventListener('change', function () {
                 valueDiv.innerText = this.value;

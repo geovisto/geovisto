@@ -5,7 +5,7 @@ import IMapObject from "../object/IMapObject";
  * 
  * @author Jiri Hynek
  */
-interface IMapEvent {
+interface IMapEvent<TSource extends IMapObject = IMapObject> {
     
     /**
      * Returns string which identifies the event.
@@ -15,6 +15,6 @@ interface IMapEvent {
     /**
      * Return source object of the event.
      */
-    getSource(): IMapObject;
+    getSource(): TSource;
 }
 export default IMapEvent;

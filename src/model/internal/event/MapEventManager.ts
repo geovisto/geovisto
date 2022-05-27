@@ -60,7 +60,7 @@ class MapEventManager implements IMapEventManager {
      * @param event 
      */
     public dispatchEvent(event: IMapEvent): void {
-        console.log("event: " + event.getType(), event);
+        // console.log("event: " + event.getType(), event);
         for(let i = 0; i < this.listeners.length; i++) {
             this.listeners[i].handleEvent(event);
         }

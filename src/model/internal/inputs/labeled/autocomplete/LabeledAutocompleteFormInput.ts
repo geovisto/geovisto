@@ -1,7 +1,7 @@
 import ILabeledAutocompleteFormInputProps from "../../../../types/inputs/labeled/autocomplete/ILabeledAutocompleteFormInputProps";
 import IMapFormInput from "../../../../types/inputs/IMapFormInput";
 import AbstractMapFormInput from "../../abstract/AbstractMapFormInput";
-import TabDOMUtil from "../../../../../util/TabDOMUtil";
+import TabDOMUtil from "../../../utils/TabDOMUtil";
 
 const ID = "geovisto-input-autocomplete";
 
@@ -39,6 +39,9 @@ class LabeledAutocompleteFormInput extends AbstractMapFormInput implements IMapF
     private inputDiv!: HTMLDivElement;
     private input!: HTMLInputElement;
     private completionListDiv!: HTMLDivElement;
+
+    private placeholder: string;
+    private setData?: (val: string) => void;
     
     /**
      * Index of the currently selected item.
@@ -49,6 +52,9 @@ class LabeledAutocompleteFormInput extends AbstractMapFormInput implements IMapF
         super(props);
         
         this.options = props.options ? props.options : [];
+
+        this.placeholder = props.placeholder || "";
+        this.setData = props.setData;
         
         // index of selected item in the completion list
         this.selectedCompletionItem = -1;
@@ -72,6 +78,18 @@ class LabeledAutocompleteFormInput extends AbstractMapFormInput implements IMapF
                 this.input.removeAttribute("disabled");
             }
         }
+    }
+
+    /*
+     * Changes options for the completion list.
+     */
+    public changeOptions(newOptions: string[]): void {
+        this.options = newOptions;
+        this.redrawMenu();
+    }
+
+    public redrawMenu(): void {
+        this.createMenu();
     }
 
     /*
@@ -149,7 +167,7 @@ class LabeledAutocompleteFormInput extends AbstractMapFormInput implements IMapF
         this.input = document.createElement('input');
         TabDOMUtil.setAttributes(this.input,
             [ "class", "type", 'placeholder', 'type' ],
-            [ COMPONENT_INPUT_CLASS, "text", 'choose dimension: ', 'hidden' ]);
+            [ COMPONENT_INPUT_CLASS, "text", this.placeholder || 'choose dimension: ', 'hidden' ]);
 
         // construct elements
         this.formDiv.appendChild(labelDiv);
@@ -208,8 +226,12 @@ class LabeledAutocompleteFormInput extends AbstractMapFormInput implements IMapF
                         this.input.value = completionItems[this.selectedCompletionItem].textContent ?? "";
                         this.completionListDiv.remove();
                         this.selectedCompletionItem != -1;
-                        // input on change event needs to be invoked manualy in this case
-                        this.input.dispatchEvent(new Event("change"));
+                        if (this.setData) {
+                            this.setData(this.getValue());
+                        } else {
+                            // input on change event needs to be invoked manualy in this case
+                            this.input.dispatchEvent(new Event("change"));
+                        }
                     } 
 
                     else if(e.key === "Escape" || e.key === "Backspace" || e.keyCode === 27 || e.keyCode === 9) {
@@ -267,8 +289,12 @@ class LabeledAutocompleteFormInput extends AbstractMapFormInput implements IMapF
                 if(completionItemDiv.parentElement) {
                     completionItemDiv.parentElement.remove();
                 }
-                // input on change event needs to be invoked manualy in this case
-                this.input.dispatchEvent(new Event("change"));
+                if (this.setData) {
+                    this.setData(completionItemDiv.textContent || "");
+                } else {
+                    // input on change event needs to be invoked manualy in this case
+                    this.input.dispatchEvent(new Event("change"));
+                }
             });
         };
 

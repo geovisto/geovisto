@@ -43,11 +43,21 @@ export type { default as IMapChangeEvent } from './model/types/event/IMapChangeE
 export type { default as IDataChangeAnimateOptions } from './model/types/event/data/IDataChangeAnimateOptions';
 export type { default as IMapDataChangeEvent } from './model/types/event/data/IMapDataChangeEvent';
 export type { default as IMapDataManagerChangeEvent } from './model/types/event/data/IMapDataManagerChangeEvent';
+export type { default as IGeoDataChangeEvent } from './model/types/event/geodata/IGeoDataChangeEvent';
+export type { default as IGeoDataManagerChangeEvent } from './model/types/event/geodata/IGeoDataManagerChangeEvent';
+export type { default as ILayerToolDimensionChangedEvent } from './model/types/event/tool/ILayerToolDimensionChangedEvent';
+export type { default as ILayerToolRenderedEvent } from './model/types/event/tool/ILayerToolRenderedEvent';
+export type { default as IToolEnabledEvent } from './model/types/event/tool/IToolEnabledEvent';
 
 // form
 export type { default as IMapForm } from './model/types/form/IMapForm';
 export type { default as IMapFormControl } from './model/types/form/IMapFormControl';
 export { instanceOfMapForm } from './model/types/form/IMapFormControl';
+
+// legend
+export type { default as IMapLegend } from './model/types/legend/IMapLegend';
+export type { default as IMapLegendControl } from './model/types/legend/IMapLegendControl';
+export { instanceOfMapLegend } from './model/types/legend/IMapLegendControl';
 
 // geodata
 export type { default as IGeoData } from './model/types/geodata/IGeoData';
@@ -152,10 +162,19 @@ export { default as DataChangeEvent } from './model/internal/event/data/DataChan
 export { default as DataManagerChangeEvent } from './model/internal/event/data/DataManagerChangeEvent';
 export { default as MapEvent } from './model/internal/event/generic/MapEvent';
 export { default as MapChangeEvent } from './model/internal/event/generic/MapChangeEvent';
+export { default as GeoDataChangeEvent } from './model/internal/event/geodata/GeoDataChangeEvent';
+export { default as GeoDataManagerChangeEvent } from './model/internal/event/geodata/GeoDataManagerChangeEvent';
+export { default as LayerToolDimensionChangeEvent } from './model/internal/event/tool/LayerToolDimensionChangedEvent';
+export { default as LayerToolRenderedEvent } from './model/internal/event/tool/LayerToolRenderedEvent';
+export { default as ToolEnabledEvent } from './model/internal/event/tool/ToolEnabledEvent';
 
 // form
 export { default as MapLayerToolForm } from './model/internal/form/MapLayerToolForm';
 export { default as MapObjectForm } from './model/internal/form/MapObjectForm';
+
+// legend
+export { default as MapLayerToolLegend } from './model/internal/legend/MapLayerToolLegend';
+export { default as MapObjectLegend } from './model/internal/legend/MapObjectLegend';
 
 // geodata
 export { default as GeoDataFactory } from './model/internal/geodata/GeoDataFactory';
@@ -204,6 +223,6 @@ export { default as IntegerRangeManager } from './model/internal/type/IntegerRan
 export { default as IntegerTypeManager } from './model/internal/type/IntegerTypeManager';
 export { default as StringTypeManager } from './model/internal/type/StringTypeManager';
 
-// UTIL
-
-export { default as TabDOMUtil } from './util/TabDOMUtil';
+// util
+export { default as TabDOMUtil } from './model/internal/utils/TabDOMUtil';
+export { roundValues } from './model/internal/utils/MathUtils';

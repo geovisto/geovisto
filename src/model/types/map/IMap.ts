@@ -1,12 +1,13 @@
+import { IMapProps, IMapInitProps } from "./IMapProps";
 import IDataChangeAnimateOptions from "../event/data/IDataChangeAnimateOptions";
-import IMapConfigManager from "../config/IMapConfigManager";
+import IGeoDataManager from "../geodata/IGeoDataManager";
 import IMapConfig from "./IMapConfig";
+import IMapConfigManager from "../config/IMapConfigManager";
 import IMapData from "../data/IMapData";
+import IMapDataManager from "../data/IMapDataManager";
 import IMapDefaults from "./IMapDefaults";
 import IMapObject from "../object/IMapObject";
-import { IMapProps, IMapInitProps } from "./IMapProps";
 import IMapState from "./IMapState";
-import IMapDataManager from "../data/IMapDataManager";
 
 /**
  * Declaration of map wrapper which handles map inputs (data, props, config), map tools and other map objects.
@@ -39,9 +40,16 @@ interface IMap<
     /**
      * It updates data and notifies listeners.
      * 
-     * @param data
+     * @param dataManager
      */
-    updateData(data: IMapDataManager): void;
+    updateData(dataManager: IMapDataManager): void;
+
+    /**
+     * It updates geo data and notifies listeners.
+     * 
+     * @param geoDataManager
+     */
+    updateGeoData(geoDataManager: IGeoDataManager): void;
 
     /**
      * It updates current data and notifies listeners.

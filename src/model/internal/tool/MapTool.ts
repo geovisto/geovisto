@@ -1,3 +1,4 @@
+import { IMapToolProps, IMapToolInitProps } from "../../types/tool/IMapToolProps";
 import IMap from "../../types/map/IMap";
 import IMapEvent from "../../types/event/IMapEvent";
 import IMapEventListener from "../../types/event/IMapEventListener";
@@ -5,11 +6,11 @@ import IMapTool from "../../types/tool/IMapTool";
 import IMapToolAPIGetter from "../../types/api/IMapToolAPIGetter";
 import IMapToolConfig from "../../types/tool/IMapToolConfig";
 import IMapToolDefaults from "../../types/tool/IMapToolDefaults";
-import { IMapToolProps, IMapToolInitProps } from "../../types/tool/IMapToolProps";
 import IMapToolState from "../../types/tool/IMapToolState";
 import MapObject from "../object/MapObject";
 import MapToolDefaults from "./MapToolDefaults";
 import MapToolState from "./MapToolState";
+import ToolEnabledEvent from "../event/tool/ToolEnabledEvent";
 
 /**
  * This class provides basic tools API.
@@ -142,6 +143,11 @@ class MapTool extends MapObject implements IMapTool, IMapEventListener {
         if(this.isEnabled() != enabled) {
             this.getState().setEnabled(enabled);
         }
+        
+        // notify listeners
+        this.getState().getMap()?.getState().getEventManager().scheduleEvent(
+            new ToolEnabledEvent(this, enabled), undefined, undefined
+        );
     }
 
     /**

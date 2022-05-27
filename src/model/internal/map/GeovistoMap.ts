@@ -4,24 +4,26 @@ import 'leaflet/dist/leaflet.css';
 // TODO - move to index.ts
 import '../../../styles/common.scss';
 
+import { IMapProps, IMapInitProps } from '../../types/map/IMapProps';
+import DataChangeEvent from '../event/data/DataChangeEvent';
+import DataManagerChangeEvent from '../event/data/DataManagerChangeEvent';
+import GeoDataManagerChangeEvent from '../event/geodata/GeoDataManagerChangeEvent';
+import GeovistoMapDefaults from './GeovistoMapDefaults';
+import GeovistoMapState from './GeovistoMapState';
 import IDataChangeAnimateOptions from '../../types/event/data/IDataChangeAnimateOptions';
+import IGeoDataManager from '../../types/geodata/IGeoDataManager';
 import IMap from '../../types/map/IMap';
-import IMapToolAPI from '../../types/api/IMapToolAPI';
 import IMapConfigManager from '../../types/config/IMapConfigManager';
+import IMapData from '../../types/data/IMapData';
 import IMapDataManager from '../../types/data/IMapDataManager';
 import IMapDefaults from '../../types/map/IMapDefaults';
 import IMapObject from '../../types/object/IMapObject';
-import { IMapProps, IMapInitProps } from '../../types/map/IMapProps';
 import IMapState from '../../types/map/IMapState';
 import IMapTool from '../../types/tool/IMapTool';
+import IMapToolAPI from '../../types/api/IMapToolAPI';
+import IMapToolAPIGetter from '../../types/api/IMapToolAPIGetter';
 import IMapToolConfig from '../../types/tool/IMapToolConfig';
 import IMapToolsManager from '../../types/tool/IMapToolsManager';
-import IMapData from '../../types/data/IMapData';
-import IMapToolAPIGetter from '../../types/api/IMapToolAPIGetter';
-import DataChangeEvent from '../event/data/DataChangeEvent';
-import DataManagerChangeEvent from '../event/data/DataManagerChangeEvent';
-import GeovistoMapDefaults from './GeovistoMapDefaults';
-import GeovistoMapState from './GeovistoMapState';
 import MapObject from '../object/MapObject';
 
 /**
@@ -288,17 +290,33 @@ class GeovistoMap extends MapObject implements IMap {
     }
 
     /**
-     * It updates data and invokes notifies listeners.
+     * It updates data and notifies listeners.
      * 
-     * @param data
+     * @param dataManager
      */
-    public updateData(data: IMapDataManager): void {
+    public updateData(dataManager: IMapDataManager): void {
         // create and dispatch event
         this.getState().getEventManager().scheduleEvent(
-            new DataManagerChangeEvent(this, data),
+            new DataManagerChangeEvent(this, dataManager),
             () => {
-                this.getState().setMapData(data);
+                this.getState().setMapData(dataManager);
             }, // update data in map state (it updates the current data as well)
+            undefined
+        );
+    }
+
+    /**
+     * It updates geo data and notifies listeners.
+     * 
+     * @param geoDataManager
+     */
+    public updateGeoData(geoDataManager: IGeoDataManager): void {
+        // create and dispatch event
+        this.getState().getEventManager().scheduleEvent(
+            new GeoDataManagerChangeEvent(this, geoDataManager),
+            () => {
+                this.getState().setGeoDataManager(geoDataManager);
+            }, // update geo data manager in map state
             undefined
         );
     }

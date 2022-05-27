@@ -1,15 +1,18 @@
-import IDataChangeAnimateOptions from "../../types/event/data/IDataChangeAnimateOptions";
-import ILayerTool from "../../types/layer/ILayerTool";
 import { ILayerToolConfig } from "../../types/layer/ILayerToolConfig";
 import { IMapToolInitProps } from "../../types/tool/IMapToolProps";
-import ILayerToolProps from "../../types/layer/ILayerToolProps";
+import IDataChangeAnimateOptions from "../../types/event/data/IDataChangeAnimateOptions";
+import ILayerTool from "../../types/layer/ILayerTool";
 import ILayerToolDefaults from "../../types/layer/ILayerToolDefaults";
+import ILayerToolProps from "../../types/layer/ILayerToolProps";
 import ILayerToolState from "../../types/layer/ILayerToolState";
 import IMapDimension from "../../types/dimension/IMapDimension";
 import LayerToolDefaults from "./LayerToolDefaults";
+import LayerToolDimensionChangeEvent from "../event/tool/LayerToolDimensionChangedEvent";
+import LayerToolRenderedEvent from "../event/tool/LayerToolRenderedEvent";
 import LayerToolRenderType from "../../types/layer/LayerToolRenderType";
 import LayerToolState from "./LayerToolState";
 import MapTool from "../tool/MapTool";
+import ToolEnabledEvent from "../event/tool/ToolEnabledEvent";
 
 /**
  * This class wraps filter tool. It provides methods for layer management.
@@ -108,6 +111,11 @@ abstract class AbstractLayerTool extends MapTool implements ILayerTool {
                 this.hideLayerItems();
             }
         }
+        
+        // notify listeners
+        this.getState().getMap()?.getState().getEventManager().scheduleEvent(
+            new ToolEnabledEvent(this, enabled), undefined, undefined
+        );
     }
 
     /**
@@ -179,6 +187,11 @@ abstract class AbstractLayerTool extends MapTool implements ILayerTool {
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public render(type: number, animateOptions?: IDataChangeAnimateOptions): void {
+        // notify listeners
+        this.getState().getMap()?.getState().getEventManager().scheduleEvent(
+            new LayerToolRenderedEvent(this, type), undefined, undefined
+        );
+
         return;
     }
 
@@ -198,6 +211,11 @@ abstract class AbstractLayerTool extends MapTool implements ILayerTool {
             if(renderType != undefined) {
                 this.render(renderType);
             }
+
+            // notify listeners
+            this.getState().getMap()?.getState().getEventManager().scheduleEvent(
+                new LayerToolDimensionChangeEvent(this), undefined, undefined
+            );
         }
     }
 }
