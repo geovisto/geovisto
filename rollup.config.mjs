@@ -8,7 +8,14 @@ import autoprefixer from 'autoprefixer';
 import postcssCopy from 'postcss-copy';
 import json from '@rollup/plugin-json';
 
-const packageJson = require('./package.json');
+//const packageJson = require('./package.json');
+//import packageJson from './package.json' assert { type: "json" };
+import { readFile } from 'fs/promises';
+const packageJson = JSON.parse(
+  await readFile(
+    new URL('./package.json', import.meta.url)
+  )
+);
 
 export default {
     input: 'src/index.ts',

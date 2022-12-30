@@ -49,6 +49,11 @@ export type { default as ILayerToolDimensionChangedEvent } from './model/types/e
 export type { default as ILayerToolRenderedEvent } from './model/types/event/tool/ILayerToolRenderedEvent';
 export type { default as IToolEnabledEvent } from './model/types/event/tool/IToolEnabledEvent';
 
+// filter
+export type { default as IMapFilterManager } from './model/types/filter/IMapFilterManager';
+export type { default as IMapFilterOperation } from './model/types/filter/IMapFilterOperation';
+export type { default as IMapFilterRule } from './model/types/filter/IMapFilterRule';
+
 // form
 export type { default as IMapForm } from './model/types/form/IMapForm';
 export type { default as IMapFormControl } from './model/types/form/IMapFormControl';
@@ -167,6 +172,18 @@ export { default as GeoDataManagerChangeEvent } from './model/internal/event/geo
 export { default as LayerToolDimensionChangeEvent } from './model/internal/event/tool/LayerToolDimensionChangedEvent';
 export { default as LayerToolRenderedEvent } from './model/internal/event/tool/LayerToolRenderedEvent';
 export { default as ToolEnabledEvent } from './model/internal/event/tool/ToolEnabledEvent';
+
+// filter
+export  { default as MapFilterOperation } from './model/internal/filter/basic/MapFilterOperation';
+export  { default as MapFilterRule } from './model/internal/filter/basic/MapFilterRule';
+export  { default as MapFiltersManager } from './model/internal/filter/basic/MapFiltersManager';
+export  { default as EqFilterOperation } from './model/internal/filter/custom/EqFilterOperation';
+export  { default as GtEqFilterOperation } from './model/internal/filter/custom/GtEqFilterOperation';
+export  { default as GtFilterOperation } from './model/internal/filter/custom/GtFilterOperation';
+export  { default as LtEqFilterOperation } from './model/internal/filter/custom/LtEqFilterOperation';
+export  { default as LtFilterOperation } from './model/internal/filter/custom/LtFilterOperation';
+export  { default as NeqFilterOperation } from './model/internal/filter/custom/NeqFilterOperation';
+export  { default as RegFilterOperation } from './model/internal/filter/custom/RegFilterOperation';
 
 // form
 export { default as MapLayerToolForm } from './model/internal/form/MapLayerToolForm';
